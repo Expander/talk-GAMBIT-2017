@@ -108,6 +108,9 @@
 \newcommand{\ab}{\alpha_b}
 \newcommand{\atau}{\alpha_\tau}
 \newcommand{\as}{\alpha_s}
+\newcommand{\SARAH}{\texttt{SARAH}}
+\newcommand{\Mathematica}{\texttt{Mathematica}}
+\newcommand{\Himalaya}{\texttt{Himalaya}}
 
 % set look of slides
 \usetheme{Madrid}
@@ -168,7 +171,7 @@
 \begin{frame}{What is FlexibleSUSY?}
   \begin{center}
     \begin{tikzpicture}
-    \node[block] (EXPR) {\textbf{analytic expressions}\\ (\texttt{Mathematica})\\ $\beta_g$, $M_h$, $\Sigma_h$, \ldots};
+    \node[block] (EXPR) {\textbf{analytic expressions}\\ (\Mathematica)\\ $\beta_g$, $M_h$, $\Sigma_h$, \ldots};
     % \node[block, below = 1cm of EXPR, text width=15em] (FS) {\textbf{spectrum generator}\\ (C++)\\ solves BVP, calculates observables};
     \node[block, below = 1cm of EXPR, text width=15em] (FS) {\textbf{spectrum generator}\\ (C++)\\ \footnotesize{\texttt{double calc\_Mhh() \{ return ...; \}}}};
     \node[block, below = 1cm of FS] (OUT) {$M_h^\pole$, $(g-2)_\mu$, EDM, $h\rightarrow\gamma\gamma$, $h\rightarrow gg$};
@@ -176,36 +179,67 @@
     \path[arrow] (FS) -- node[right]{calculates obs.} node[left]{solves BVP} (OUT);
     \draw[red,very thick] ($(EXPR.north west)+(-1.5,0.5)$) node(FSname){} rectangle ($(OUT.south east)+(1.5,-0.5)$);
     \node[above right = 0cm and 0cm of FSname.north west] {\textbf{\textcolor{red}{FlexibleSUSY}}};
-    \node[block, right = 2cm of EXPR, text width=5em] (SARAH) {\textbf{SARAH}};
+    \node[block, right = 2cm of EXPR, text width=5em] (SARAH) {\textbf{\SARAH}};
     \path[arrow] (SARAH) -- node[above]{calculates} (EXPR);
     \end{tikzpicture}
   \end{center}
 \end{frame}
 
+\begin{frame}{Example: CMSSM}
+  BVP
+\end{frame}
+
 \section{Features}
 
-\begin{frame}{Features}
-  For all models:
+\begin{frame}{Features for all models}
+  Physics features:
   \begin{itemize}
-  \item \MSbar/\DRbar scheme
-  \item 2-loop running
+  \item calculation in the \MSbar/\DRbar\ scheme
+  \item real or complex parameters
+  \item 2-loop running (RGEs from \SARAH)
   \item 1-loop threshold corrections
-  \item 1-loop pole masses
-  \item 1-loop $(g-2)_\mu$ + 2-loop leading log QED
-  \item 1-loop EDMs
+  \item 1-loop pole masses (1-loop corrections from \SARAH)
+  \item 1-loop $(g-2)_\mu$ + 2-loop leading QED log
+  \item 1-loop EDMs for all fundamental fermions
+  \item effective couplings $h\rightarrow \gamma\gamma$ and
+    $h\rightarrow gg$ at N$^3$LO QCD
+  \item 1-loop $M_W$ prediction from $G_F$ + 2-loop SM contributions
   \end{itemize}
-  For the MSSM:
+  %
+  Non-physics features:
+  \begin{itemize}
+    \item SLHA input/output
+    \item \Mathematica\ input/output
+    \item SQL database output
+    \item modular C++ code
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Model-specific features}
+  \emph{MSSM:}
   \begin{itemize}
   \item 3-loop running
-  \item 2-loop SQCD threshold corrections to $y_{t,b}$, $\alpha_s$
-  \item 2-loop corrections to $M_{h,H,A}$
+  \item 2-loop SQCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
+  \item 2-loop contributions to $M_{h,H,A}$
+  \item 3-loop contributions to $M_h$ (via \Himalaya)
   \end{itemize}
-  For the SM:
+  \emph{NMSSM:}
+  \begin{itemize}
+  \item 2-loop SQCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
+  \item 2-loop contributions to $M_{h,H,A}$
+  \end{itemize}
+  \emph{SM:}
   \begin{itemize}
   \item 3-loop running
-  \item 3-loop QCD threshold corrections to $y_{t,b}$, $\alpha_s$
+  \item 3-loop QCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
   \item 3-loop contributions to $M_h$
   \item 2-loop threshold corrections to the MSSM (\texttt{HSSUSY})
+  \end{itemize}
+  \emph{split-MSSM:}
+  \begin{itemize}
+  \item 2-loop QCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
+  \item 3-loop contributions to $M_h$
+  \item 2-loop threshold corrections to the MSSM (\texttt{SplitMSSM})
   \end{itemize}
 \end{frame}
 
