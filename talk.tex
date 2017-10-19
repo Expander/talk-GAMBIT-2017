@@ -16,8 +16,8 @@
 \usepackage{amsmath,amssymb,amstext,amsfonts} % mathrsfs
 \usepackage{array,booktabs,tabularx}
 \usepackage{tikz,tikz-uml,pgf-pie}
-\usetikzlibrary{shapes,calc,arrows,positioning}
-\tikzstyle{block} = [rectangle, draw, text width=7em, text centered, minimum height=2em]
+\usetikzlibrary{shapes,calc,arrows,positioning,shapes}
+\tikzstyle{block} = [rectangle, draw, thick, text width=10em, text centered, minimum height=2em]
 \tikzstyle{arrow} = [draw, -latex, thick]
 \tikzstyle{arrow2} = [draw, latex-latex, thick]
 \tikzstyle{quark}  = [rectangle, draw, fill=yellow, minimum width=2em, text centered, minimum height=2em]
@@ -162,6 +162,23 @@
 \begin{frame}{What is FlexibleSUSY?}
   \begin{center}
     \includegraphics[width=\textwidth]{images/FS.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}{What is FlexibleSUSY?}
+  \begin{center}
+    \begin{tikzpicture}
+    \node[block] (EXPR) {\textbf{analytic expressions}\\ (\texttt{Mathematica})\\ $\beta_g$, $M_h$, $\Sigma_h$, \ldots};
+    % \node[block, below = 1cm of EXPR, text width=15em] (FS) {\textbf{spectrum generator}\\ (C++)\\ solves BVP, calculates observables};
+    \node[block, below = 1cm of EXPR, text width=15em] (FS) {\textbf{spectrum generator}\\ (C++)\\ \footnotesize{\texttt{double calc\_Mhh() \{ return ...; \}}}};
+    \node[block, below = 1cm of FS] (OUT) {$M_h^\pole$, $(g-2)_\mu$, EDM, $h\rightarrow\gamma\gamma$, $h\rightarrow gg$};
+    \path[arrow] (EXPR) -- node[right]{generates} (FS);
+    \path[arrow] (FS) -- node[right]{calculates obs.} node[left]{solves BVP} (OUT);
+    \draw[red,very thick] ($(EXPR.north west)+(-1.5,0.5)$) node(FSname){} rectangle ($(OUT.south east)+(1.5,-0.5)$);
+    \node[above right = 0cm and 0cm of FSname.north west] {\textbf{\textcolor{red}{FlexibleSUSY}}};
+    \node[block, right = 2cm of EXPR, text width=5em] (SARAH) {\textbf{SARAH}};
+    \path[arrow] (SARAH) -- node[above]{calculates} (EXPR);
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
