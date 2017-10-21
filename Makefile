@@ -2,12 +2,8 @@
 
 OUTFILENAME := talk.pdf
 PLOTS       := \
-		plots/uncertainties/DMh_MS_TB-5_Xt-0.pdf \
-		plots/uncertainties/Mh_MS_TB-5_Xt-0.pdf \
-		plots/uncertainties/Mh_MS_TB-5_Xt-0_FO_EFT.pdf \
-		plots/FlexibleEFTHiggs-2/scan_Mh_Xt_TB-5_MS-2000.pdf \
-		plots/SPheno-FS-uncertainty/scale_MSSM_yt_variants.pdf \
-		plots/contributions/scan_Mh_MS_TB-5_Xt-0_contributions.pdf
+		plots/HSSUSY/Mh_Xt_TB-5_MS-5000.pdf \
+		plots/HSSUSY/Mh_MS_TB-5_Xt-0.pdf
 
 TEXDIRS     := $(PLOTSDIR)
 BIBTEX      := bibtex
@@ -16,28 +12,10 @@ BIBTEX      := bibtex
 
 all: $(OUTFILENAME)
 
-plots/uncertainties/DMh_MS_TB-5_Xt-0.pdf: plots/uncertainties/plot_DMh.sh plots/uncertainties/*.dat
+plots/HSSUSY/Mh_Xt_TB-5_MS-5000.pdf: plots/HSSUSY/plot_Mh_Xt.py plots/HSSUSY/*.dat
 	$<
 
-plots/uncertainties/Mh_MS_TB-5_Xt-0.pdf: plots/uncertainties/plot_Mh.sh plots/uncertainties/*.dat
-	$<
-
-plots/uncertainties/Mh_MS_TB-5_Xt-0_FO_EFT.pdf: \
-plots/uncertainties/plot_Mh_FO_EFT.sh \
-plots/uncertainties/*.dat
-	$<
-
-plots/FlexibleEFTHiggs-2/scan_Mh_Xt_TB-5_MS-2000.pdf: \
-plots/FlexibleEFTHiggs-2/plot_FlexibleEFTHiggs_Mh_Xt.sh \
-plots/FlexibleEFTHiggs-2/*.dat
-	$<
-
-plots/SPheno-FS-uncertainty/scale_MSSM_yt_variants.pdf: \
-plots/SPheno-FS-uncertainty/scale_MSSM_yt_variants.gnuplot plots/SPheno-FS-uncertainty/*.dat
-	gnuplot -e 'dir="plots/SPheno-FS-uncertainty"' $<
-
-plots/contributions/scan_Mh_MS_TB-5_Xt-0_contributions.pdf: \
-plots/contributions/plot_MSSMH3m.sh plots/contributions/*.dat
+plots/HSSUSY/Mh_MS_TB-5_Xt-0.pdf: plots/HSSUSY/plot_Mh_MS.py plots/HSSUSY/*.dat
 	$<
 
 %.pdf: %.tex $(PLOTS)
