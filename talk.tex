@@ -452,4 +452,74 @@ UseHiggs3LoopSM   = True; (* 3L contributions to Mh *)
   \usebox{\listbox}
 \end{frame}
 
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+$ ./createmodel --name=HSSUSY
+$ ./configure --with-models=HSSUSY
+$ make -j4
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Finally: Build the spectrum generator}
+  \usebox{\listbox}
+  \\[1em]
+  \begin{itemize}
+  \item[\texttt{1}:] creates the directory \lstinline{models/HSSUSY/}
+    with makefile module
+  \item[\texttt{2}:] checks the system and creates the \lstinline{Makefile}
+  \item[\texttt{3}:] generates the C++ code and compiles it
+  \end{itemize}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+$ cd models/HSSUSY/
+$ ./run_HSSUSY.x \
+    --slha-input-file=LesHouches.in.HSSUSY
+Block SPINFO
+     1   FlexibleSUSY
+     2   2.0.1
+     5   HSSUSY
+     9   4.12.0
+Block MASS
+        24     8.03785042E+01   # VWp
+        25     1.14703451E+02   # hh
+...
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Run HSSUSY}
+  Run HSSUSY using an SLHA input file:\\[2em]
+  \usebox{\listbox}
+\end{frame}
+
+\begin{frame}
+  TODO: Plot Mh(MS)
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+HighScaleInput = {
+   {\[Lambda], lambdaTree + lambda1L}
+};
+
+lambdaTree = (3/5 g1^2 + g2^2)/4 \
+             Cos[2 ArcTan[TanBeta]]^2;
+
+lambda1L = With[{yt = Yu[3,3],
+                 Xt = AtInput - MuInput/TanBeta},
+   3/8 yt^4/Pi^2 ( Xt^2/MSUSY^2 - Xt^4/(12 MSUSY^4) )
+];
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Let's add 1-loop corrections for $\lambda$}
+  Let's implement the leading 1-loop correction from
+  \bigcite{0705.1496}:
+  \begin{align*}
+    \lambda(Q) &= \frac{1}{4} \left[ \frac{3}{5} g_1^2 + g_2^2 \right] \cos_{2\beta}^2 
+    + \frac{3}{8} \frac{y_t^4}{\pi^2}\left[
+       \frac{X_t^2}{\MS^2}
+       - \frac{X_t^4}{12 \MS^4}
+    \right]
+  \end{align*}
+  with $X_t = A_t - \mu/\tan\beta$.
+  In the HSSUSY model file this reads:\\[2em]
+  \usebox{\listbox}
+\end{frame}
+
 \end{document}
