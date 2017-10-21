@@ -56,6 +56,9 @@
   frame=single}
 
 \definecolor{darkgreen}{RGB}{0,176,0}
+\definecolor{darkred}{RGB}{200,0,0}
+\definecolor{darkred}{RGB}{200,0,0}
+\definecolor{darkyellow}{RGB}{255,165,0}
 
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
@@ -130,6 +133,7 @@
 }
 \makeatother
 \usecolortheme{tud}
+\setbeamertemplate{blocks}[rounded][shadow=false]
 
 \title{FlexibleSUSY}
 
@@ -236,68 +240,83 @@
 
 \section{Features}
 
+\newenvironment{obsblock}[1]{%
+  \setbeamercolor{block body}{bg=darkgreen!10}
+  \setbeamercolor{block title}{bg=darkgreen}
+  \begin{block}{#1}}{\end{block}}
+
+\newenvironment{precblock}[1]{%
+  \setbeamercolor{block body}{bg=darkred!10}
+  \setbeamercolor{block title}{bg=darkred}
+  \begin{block}{#1}}{\end{block}}
+
+\newenvironment{flexblock}[1]{%
+  \setbeamercolor{block body}{bg=blue!10}
+  \setbeamercolor{block title}{bg=blue}
+  \begin{block}{#1}}{\end{block}}
+
+\newenvironment{speedblock}[1]{%
+  \setbeamercolor{block body}{bg=black!10}
+  \setbeamercolor{block title}{bg=black}
+  \begin{block}{#1}}{\end{block}}
+
 \begin{frame}{Features for all models}
-  Physics features:
-  \begin{itemize}
-  \item calculation in the \MSbar/\DRbar\ scheme
-  \item real or complex parameters
-  \item 2-loop running (RGEs from \SARAH)
-  \item 1-loop threshold corrections
-  \item 1-loop pole masses (1-loop corrections from \SARAH)
-  \item 1-loop $(g-2)_\mu$ + 2-loop leading QED log
-  \item 1-loop EDMs for all fundamental fermions
-  \item effective couplings $h\rightarrow \gamma\gamma$ and
-    $h\rightarrow gg$ at N$^3$LO QCD
-  \item 1-loop $M_W$ prediction from $G_F$ + 2-loop SM contributions
-  \item 1-loop FlexibleEFTHiggs calculation of $M_h$
-  \end{itemize}
-  %
-  Non-physics features:
-  \begin{itemize}
-    \item SLHA input/output
-    \item \Mathematica\ input/output
-    \item SQL database output
-    \item modular C++ code
-  \end{itemize}
+  \begin{columns}[T]
+    \begin{column}{0.49\textwidth}
+      \begin{obsblock}{Observables}
+        $M_h$, $M_W$, BSM masses, $(g-2)_\mu$, EDMs,
+        $h\rightarrow\gamma\gamma$, $h\rightarrow gg$
+      \end{obsblock}
+      \begin{speedblock}{Speed}
+        C++ expression templates, multi-threading
+      \end{speedblock}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \begin{precblock}{High precision}
+        2L RGEs + 1L self energies (via \SARAH) + 1L thresholds,
+        NNLL resummation for $M_h$ % (\texttt{FlexibleEFTHiggs})
+      \end{precblock}
+      \begin{flexblock}{Flexibility}
+        multipe BVP solvers, user-defined BCs, modular C++ code, SLHA
+        input/output, \Mathematica\ input/output, SQLite output
+      \end{flexblock}
+    \end{column}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{Model-specific higher order contributions}
-  \emph{SM:}
-  \begin{itemize}
-  \item 3-loop running
-  \item 3-loop QCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
-  \item 3-loop contributions to $M_h$
-  \item 2-loop threshold corrections to the MSSM (\texttt{HSSUSY})
-  \end{itemize}
-  \emph{MSSM:}
-  \begin{itemize}
-  \item 3-loop running
-  \item 2-loop SQCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
-  \item 2-loop contributions to $M_{h,H,A}$
-  \item 3-loop contributions to $M_h$ (via \Himalaya)
-  \item 2-loop $(g-2)_\mu$ (via \GMTCalc)
-  \end{itemize}
-  \emph{NMSSM:}
-  \begin{itemize}
-  \item skipping \ldots
-  \end{itemize}
-  % \begin{itemize}
-  % \item 2-loop SQCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
-  % \item 2-loop contributions to $M_{h,H,A}$
-  % \end{itemize}
-  \emph{split-MSSM:}
-  \begin{itemize}
-  \item skipping \ldots
-  \end{itemize}
-  % \begin{itemize}
-  % \item 2-loop QCD threshold corrections to $y_t$, $y_b$, $\alpha_s$
-  % \item 3-loop contributions to $M_h$
-  % \item 2-loop threshold corrections to the MSSM (\texttt{SplitMSSM})
-  % \end{itemize}
-  \emph{THDM-II:}
-  \begin{itemize}
-  \item skipping \ldots
-  \end{itemize}
+\newenvironment{modelblock}[1]{%
+  \setbeamercolor{block body}{bg=darkyellow!15}
+  \setbeamercolor{block title}{fg=black,bg=darkyellow}
+  \begin{block}{#1}}{\end{block}}
+
+\begin{frame}{Additional model-specific precision corrections}
+  \begin{columns}[T]
+    \begin{column}{0.49\textwidth}
+      \begin{modelblock}{MSSM}
+        3L RGEs, 3L $M_h$, 2L $M_{H,A,H^\pm}$, 2L $(g-2)_\mu$, 2L
+        thresholds
+      \end{modelblock}
+      \begin{modelblock}{NMSSM}
+        2L $M_h$, 2L $M_{H,A,H^\pm}$, 2L thresholds
+      \end{modelblock}
+      \begin{modelblock}{Split-MSSM}
+        3L $M_h$, 2L thresholds for $y_t$, 2L thresholds for $\lambda$, $\tilde{g}_{ip}$
+        the MSSM
+      \end{modelblock}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \begin{modelblock}{SM}
+        3L RGEs, 3L $M_h$, 3L thresholds for $\as$, $y_{t,b}$, 2L
+        thresholds for $\lambda$ to the MSSM (\texttt{HSSUSY})
+      \end{modelblock}
+      \begin{modelblock}{THDM-II}
+        2L thresholds for $\lambda_i$ to the MSSM
+      \end{modelblock}
+      \begin{modelblock}{THDM-II + $\tilde{h}$ + $\tilde{g}$}
+        1L thresholds for $\lambda_i$ to the MSSM
+      \end{modelblock}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \section{Example: HSSUSY}
