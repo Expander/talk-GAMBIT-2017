@@ -50,7 +50,7 @@ leg = plt.legend([r'$\lambda^{(0L)}$',
            loc='lower center', fontsize=10, fancybox=None, framealpha=None)
 leg.get_frame().set_alpha(1.0)
 leg.get_frame().set_edgecolor('black')
-plt.ylim([110,130])
+plt.ylim([110,128])
 plt.xlim([-4,4])
 plt.title(r'$M_S = 5\;\mathrm{TeV}, \tan\beta = 5$')
 
