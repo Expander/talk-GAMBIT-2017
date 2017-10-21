@@ -363,7 +363,7 @@ FSAuxiliaryParameterInfo = {
 LowScale = LowEnergyConstant[MZ];
 
 LowScaleInput = {
-   {v, 2 MZMSbar / Sqrt[GUTNormalization[g1]^2 g1^2 + g2^2]},
+   {v, 2 MZMSbar / Sqrt[3/5 g1^2 + g2^2]},
    {Yu, Automatic},
    {Yd, Automatic},
    {Ye, Automatic}
@@ -372,7 +372,10 @@ LowScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 4: Define low-scale boundary condition}
+  Fix $v^{\MSbar}$, $y_f^{\MSbar}$ and $g_i^{\MSbar}$ at the scale $Q = M_Z$:\\[2em]
   \usebox{\listbox}
+  \\[1em]
+  \lstinline{MZMSbar} = $m_Z^{\MSbar}(Q)$
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
