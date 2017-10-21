@@ -423,13 +423,20 @@ HighScaleInput = {
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
 UseSM3LoopRGEs    = True; (* 3L RGEs *)
-UseHiggs2LoopSM   = True; (* 2L contributions to Mh *)
-UseHiggs3LoopSM   = True; (* 3L contributions to Mh *)
 UseYukawa3LoopQCD = True; (* 3L corr. to yt, yb *)
 UseSMAlphaS3Loop  = True; (* 3L corr. to alpha_s *)
+UseHiggs2LoopSM   = True; (* 2L contributions to Mh *)
+UseHiggs3LoopSM   = True; (* 3L contributions to Mh *)
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 7: Enable SM-specific higher order corrections}
+  Higher-order corrections from the literature \mycite{1407.4336, hep-ph/0004189}:
+  \begin{align*}
+    m_t &= M_t + \Delta^{(1)} m_t + \Delta^{(2)} m_t + \Delta^{(3)} m_t \\
+    \alpha_s &= \frac{\alpha_s^{\SM(5)}}{1 + \Delta^{(1)} \as + \Delta^{(2)} \as + \Delta^{(3)} \as} \\
+    M_h^2 &= m_h^2 + \Delta^{(1)} m_h^2 + \Delta^{(2)} m_h^2 + \Delta^{(3)} m_h^2
+  \end{align*}
+  \\[1em]
   \usebox{\listbox}
 \end{frame}
 
