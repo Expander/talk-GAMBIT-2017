@@ -303,14 +303,32 @@
   \begin{center}
   \begin{tikzpicture}
     \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
-    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MSSM} (3,4) node[right,black]{fix $\lambda$};
-    \draw[thick,dashed,darkgreen] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right,black]{fix $\mu^2$};
-    \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$};
+    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MSSM} (3,4) node[right,black]{fix $\lambda$ from MSSM};
+    \draw[thick,dashed,darkgreen] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right,black]{fix $\mu^2$ by EWSB};
+    \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$ from obs.};
   \end{tikzpicture}
   \end{center}
 \end{frame}
 
 \newsavebox{\listbox}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+LagNoHC = mu2 conj[H].H -
+          1/2 \[Lambda] conj[H].H.conj[H].H;
+LagHC   = -(Yd conj[H].d.q + Ye conj[H].e.l
+            + Yu u.q.H);
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 0: Chose a \SARAH\ model}
+  We chose \SARAH's \texttt{SM} model with the parameters:
+  \begin{center}
+  \lstinline{g1}, \lstinline{g2}, \lstinline{g3}, \lstinline{Yu},
+  \lstinline{Yd}, \lstinline{Ye}, \lstinline{\\[Lambda]},
+  \lstinline{mu2}, \lstinline{v}
+  \end{center}
+  and the non-interaction Lagrangian \\[2em]
+  \usebox{\listbox}
+\end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
 $ cd FlexibleSUSY/
@@ -333,13 +351,6 @@ FSDefaultSARAHModel = SM;
   \lstinline{model_files/HSSUSY/FlexibleSUSY.m.in}:
   \\[2em]
   \usebox{\listbox}
-  \\[1em]
-  \SARAH's \texttt{SM} model defines the parameters:
-  \begin{center}
-  \lstinline{g1}, \lstinline{g2}, \lstinline{g3}, \lstinline{Yu},
-  \lstinline{Yd}, \lstinline{Ye}, \lstinline{\\[Lambda]},
-  \lstinline{mu2}, \lstinline{v}
-\end{center}
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
@@ -423,14 +434,15 @@ HighScaleInput = {
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
 UseSM3LoopRGEs    = True; (* 3L RGEs *)
-UseYukawa3LoopQCD = True; (* 3L corr. to yt, yb *)
+UseYukawa3LoopQCD = True; (* 3L corr. to yt *)
 UseSMAlphaS3Loop  = True; (* 3L corr. to alpha_s *)
 UseHiggs2LoopSM   = True; (* 2L contributions to Mh *)
 UseHiggs3LoopSM   = True; (* 3L contributions to Mh *)
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 7: Enable SM-specific higher order corrections}
-  Higher-order corrections from the literature \mycite{1407.4336, hep-ph/0004189}:
+  Higher-order corrections from the literature \mycite{hep-ph/9911434,
+    hep-ph/9912391, hep-ph/0004189, 1407.4336}:
   \begin{align*}
     m_t &= M_t + \Delta^{(1)} m_t + \Delta^{(2)} m_t + \Delta^{(3)} m_t \\
     \alpha_s &= \frac{\alpha_s^{\SM(5)}}{1 + \Delta^{(1)} \as + \Delta^{(2)} \as + \Delta^{(3)} \as} \\
