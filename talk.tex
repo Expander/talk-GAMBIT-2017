@@ -355,7 +355,7 @@ FSDefaultSARAHModel = SM;
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
 EXTPAR = {
-    {0, MSUSY},
+    {0, MS},
     {1, M1Input},
     {2, M2Input},
     {3, M3Input},
@@ -413,7 +413,7 @@ SUSYScaleInput = {
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
-HighScale = MSUSY;
+HighScale = MS;
 
 HighScaleInput = {
     {\[Lambda],
@@ -423,7 +423,7 @@ HighScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 6: Define high-scale boundary condition}
-  Fix $\lambda$ by matching to the MSSM the scale $Q$ = \lstinline{MSUSY}:
+  Fix $\lambda$ by matching to the MSSM the scale $Q$ = \lstinline{MS}:
   \begin{align*}
     \lambda(Q) = \frac{1}{4} \left[ \frac{3}{5} g_1^2(Q) + g_2^2(Q) \right] \cos_{2\beta}^2
     \qquad \text{\mycite{0705.1496}}
@@ -503,7 +503,7 @@ lambdaTree = (3/5 g1^2 + g2^2)/4 \
 
 lambda1L = With[{yt = Yu[3,3],
                  Xt = AtInput - MuInput/TanBeta},
-   3/8 yt^4/Pi^2 ( Xt^2/MSUSY^2 - Xt^4/(12 MSUSY^4) )
+   3/8 yt^4/Pi^2 ( Xt^2/MS^2 - Xt^4/(12 MS^4) )
 ];
 \end{lstlisting}\end{lrbox} % $
 
