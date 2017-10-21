@@ -389,6 +389,7 @@ SUSYScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 5: Define EWSB-scale boundary condition}
+  Fix $\mu^2$ by EWSB condition at the scale $Q$ = \lstinline{MEWSB}:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
@@ -397,12 +398,18 @@ HighScale = MSUSY;
 
 HighScaleInput = {
     {\[Lambda],
-       (g2^2 + 3/5 g1^2)/4 Cos[2 ArcTan[TanBeta]]^2
+       (3/5 g1^2 + g2^2)/4 Cos[2 ArcTan[TanBeta]]^2
     }
 };
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 6: Define high-scale boundary condition}
+  Fix $\lambda$ by matching to the MSSM the scale $Q$ = \lstinline{MSUSY}:
+  \begin{align*}
+    \lambda(Q) = \frac{1}{4} \left[ \frac{3}{5} g_1^2(Q) + g_2^2(Q) \right] \cos_{2\beta}^2
+    \qquad \text{\mycite{0705.1496}}
+  \end{align*}
+  \\[1em]
   \usebox{\listbox}
 \end{frame}
 
