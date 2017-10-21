@@ -43,7 +43,7 @@
 \usepackage{listings}
 \lstset{breaklines=true,
   breakatwhitespace=true,
-%  numbers=left,
+  numbers=left,
   numberstyle=\tiny,
   stepnumber=1,
   basicstyle=\ttfamily\footnotesize,
@@ -308,6 +308,111 @@
     \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$};
   \end{tikzpicture}
   \end{center}
+\end{frame}
+
+\newsavebox{\listbox}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+$ cd FlexibleSUSY/
+$ mkdir model_files/HSSUSY/
+$ touch model_files/HSSUSY/FlexibleSUSY.m.in
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Step 1: Create FlexibleSUSY model file}
+  \usebox{\listbox}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+FSModelName = "HSSUSY";
+FSEigenstates = SARAH`EWSB;
+FSDefaultSARAHModel = SM;
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 2: Define model information}
+  Put into the model file \lstinline{model_files/HSSUSY/FlexibleSUSY.m.in}:
+  \\[2em]
+  \usebox{\listbox}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+EXTPAR = {
+    {0, MSUSY},
+    {1, M1Input},
+    {2, M2Input},
+    {3, M3Input},
+    {4, MuInput},
+    {5, mAInput},
+    {6, MEWSB},
+    {7, AtInput},
+    {25, TanBeta}
+};
+
+FSAuxiliaryParameterInfo = {
+    {msq2, { LesHouches -> MSQ2IN,
+             ParameterDimensions -> {3,3},
+             InputParameter -> True } },
+    ...
+};
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 3: Define MSSM input parameters}
+  \usebox{\listbox}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+LowScale = LowEnergyConstant[MZ];
+
+LowScaleInput = {
+   {v, 2 MZMSbar / Sqrt[GUTNormalization[g1]^2 g1^2 + g2^2]},
+   {Yu, Automatic},
+   {Yd, Automatic},
+   {Ye, Automatic}
+   (* gauge couplings are fixed automatically *)
+};
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 4: Define low-scale boundary condition}
+  \usebox{\listbox}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+EWSBOutputParameters = { mu2 };
+
+SUSYScale = MEWSB;
+
+SUSYScaleInput = {
+   FSSolveEWSBFor[EWSBOutputParameters]
+};
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 5: Define EWSB-scale boundary condition}
+  \usebox{\listbox}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+HighScale = MSUSY;
+
+HighScaleInput = {
+    {\[Lambda],
+       (g2^2 + 3/5 g1^2)/4 Cos[2 ArcTan[TanBeta]]^2
+    }
+};
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 6: Define high-scale boundary condition}
+  \usebox{\listbox}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+UseSM3LoopRGEs    = True; (* 3L RGEs *)
+UseHiggs2LoopSM   = True; (* 2L contributions to Mh *)
+UseHiggs3LoopSM   = True; (* 3L contributions to Mh *)
+UseYukawa3LoopQCD = True; (* 3L corr. to yt, yb *)
+UseSMAlphaS3Loop  = True; (* 3L corr. to alpha_s *)
+\end{lstlisting}\end{lrbox}
+
+\begin{frame}{Step 7: Enable SM-specific higher order corrections}
+  \usebox{\listbox}
 \end{frame}
 
 \end{document}
