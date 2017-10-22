@@ -709,7 +709,7 @@ CalcMh[MS_, TB_, Xtt_, deltaEFT_] :=
        ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Estimate the EFT uncertainty}
   Extend our wrapper function:\\[2em]
   \usebox{\listbox}
 \end{frame}
@@ -722,12 +722,12 @@ data = ParallelMap[{ N[#],
        ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Estimate the EFT uncertainty}
   Scan over $\MS \in [0.1, 5]\eh{TeV}$ with $X_t = 0$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Estimate the EFT uncertainty}
   \includegraphics[width=0.49\textwidth]{plots/HSSUSY/Mh_MS_TB-5_Xt-0_EFT}\hfill
   \includegraphics[width=0.49\textwidth]{plots/HSSUSY/Mh_MS_TB-5_Xt-0_EFT_uncertainty}
 \end{frame}
