@@ -81,7 +81,7 @@ CalcMh[MS_, TB_, Xtt_] :=
               Pole[M[hh]] /. (HSSUSY /. spec)]
           ];
 
-CalcMh1L[MS_, TB_, Xtt_, loops_] :=
+CalcMh1L[MS_, TB_, Xtt_, loops_, deltaEFT_] :=
     Module[{handle, spec},
            handle = FSHSSUSY1LOpenHandle[
                fsSettings -> settings,
@@ -106,7 +106,8 @@ CalcMh1L[MS_, TB_, Xtt_, loops_] :=
                    TwoLoopAbAs -> 1,
                    TwoLoopAtAb -> 1,
                    TwoLoopAtauAtau -> 1,
-                   TwoLoopAtAt -> 1
+                   TwoLoopAtAt -> 1,
+                   DeltaEFT -> deltaEFT
                }
            ];
            spec = FSHSSUSY1LCalculateSpectrum[handle];
@@ -123,11 +124,12 @@ TB  = 5;
 
 data = ParallelMap[
     { N[#],
-      CalcMh1L[#, TB, Xtt, 0],
-      CalcMh1L[#, TB, Xtt, 1],
-      CalcMh[#, TB, Xtt]
+      CalcMh1L[#, TB, Xtt, 0, 0],
+      CalcMh1L[#, TB, Xtt, 1, 0],
+      CalcMh[#, TB, Xtt],
+      CalcMh1L[#, TB, Xtt, 1, 1]
     }&,
-    LogRange[300, 5 10^4, 100]
+    LogRange[100, 5 10^4, 100]
 ];
 
 Export["Mh_MS_TB-" <> ToString[TB] <> "_Xt-0.dat", data];
@@ -136,9 +138,10 @@ MS = 5000;
 
 data = ParallelMap[
     { N[#],
-      CalcMh1L[MS, TB, #, 0],
-      CalcMh1L[MS, TB, #, 1],
-      CalcMh[MS, TB, #]
+      CalcMh1L[MS, TB, #, 0, 0],
+      CalcMh1L[MS, TB, #, 1, 0],
+      CalcMh[MS, TB, #],
+      CalcMh1L[MS, TB, #, 1, 1]
     }&,
     Range[-3.5, 3.5, 0.1]
 ];
