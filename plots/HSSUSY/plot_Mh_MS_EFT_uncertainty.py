@@ -46,7 +46,7 @@ plt.plot(MS, Mh1L   , 'b--', linewidth=1.2, dashes=(3,2,3,2))
 plt.fill_between(MS, Mh1L + (Mh1LEFT - Mh1L), Mh1L - (Mh1LEFT - Mh1L),
                  facecolor='blue', alpha=0.3, interpolate=True, linewidth=0.0)
 
-leg = plt.legend([r'$\lambda^{1L}$'],
+leg = plt.legend([r'$\lambda^{(1L)}$'],
            loc='lower right', fontsize=10, fancybox=None, framealpha=None)
 leg.get_frame().set_alpha(1.0)
 leg.get_frame().set_edgecolor('black')

@@ -649,7 +649,7 @@ lambda1L = With[{yt = Yu[3,3],
 ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's add 1-loop corrections for $\lambda$}
+\begin{frame}{Add 1-loop corrections for $\lambda$}
   Let's implement the leading 1-loop correction from
   \bigcite{0705.1496}:
   \begin{align*}
@@ -673,22 +673,22 @@ data = ParallelMap[{ N[#], CalcMh[MS, TB, #] }&,
        ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Parameter scan}
+\begin{frame}{Parameter scan over $X_t/\MS$}
   Scan over $X_t/\MS \in [-3.5, 3.5]$ with $\MS = 5\eh{TeV}$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
-\begin{frame}{Tree-level vs.\ leading 1-loop vs.\ leading 2-loop}
+\begin{frame}{Parameter scan over $X_t/\MS$}
   \begin{center}
     \includegraphics[width=0.6\textwidth]{plots/HSSUSY/Mh_Xt_TB-5_MS-5000}
   \end{center}
-  2-loop contributions from \bigcite{1407.4081, 1703.08166}.
+  1- and 2-loop contributions from \bigcite{1407.4081, 1703.08166}
 \end{frame}
 
-\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
 EXTPAR = {
    ...
-   {DeltaEFT, 100}
+   {DeltaEFT, 100} (* <-- new input parameter *)
 };
 
 HighScaleInput = {
@@ -705,7 +705,7 @@ lambda1LEFT = DeltaEFT Yu[3,3]^4/(4 Pi)^2 v^2/MS^2;
   Estimate these terms by adding
   \begin{align*}
     \lambda(Q) &= \lambda^{(0L)} + \Delta\lambda^{(1L)}
-    + \delta_\text{EFT} \frac{y_t^4}{(4\pi)^2} \frac{v^2}{\MS^2}
+    + \textcolor{red}{\delta_\text{EFT} \frac{y_t^4}{(4\pi)^2} \frac{v^2}{\MS^2}}
   \end{align*}
   with $\delta_\text{EFT} = 0$ or $1$.\\[1em]
   \usebox{\listbox}

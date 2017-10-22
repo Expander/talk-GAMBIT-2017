@@ -46,8 +46,8 @@ plt.plot(MS, Mh1L, 'b--', linewidth=1.2, dashes=(3,2,3,2))
 # plt.plot(MS, Mh2L, 'r-' , linewidth=1.2)
 plt.plot(MS, Mh1LEFT, 'b:', linewidth=1.2)
 
-leg = plt.legend([r'$\lambda^{1L}, \delta_{\mathrm{EFT}} = 0$',
-                  r'$\lambda^{1L}, \delta_{\mathrm{EFT}} = 1$'],
+leg = plt.legend([r'$\lambda^{(1L)}, \delta_{\mathrm{EFT}} = 0$',
+                  r'$\lambda^{(1L)}, \delta_{\mathrm{EFT}} = 1$'],
            loc='lower right', fontsize=10, fancybox=None, framealpha=None)
 leg.get_frame().set_alpha(1.0)
 leg.get_frame().set_edgecolor('black')
