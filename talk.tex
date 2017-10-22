@@ -512,7 +512,7 @@ Block MASS
 Get["models/HSSUSY/HSSUSY_librarylink.m"];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Parameter scan}
   We'll use the \Mathematica\ interface of FlexibleSUSY to perform a
   scan over $\MS$.\\[1em]
   Open \Mathematica\ and type:\\[2em]
@@ -555,7 +555,7 @@ spec = FSHSSUSYCalculateSpectrum[handle];
 FSHSSUSYCloseHandle[handle];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Parameter scan}
   \usebox{\listbox}
 \end{frame}
 
@@ -579,7 +579,7 @@ Out[]=
 }
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Parameter scan}
   \usebox{\listbox}
 \end{frame}
 
@@ -607,8 +607,8 @@ CalcMh[MS_, TB_, Xtt_] :=
        ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
-  Wrap everything into a function:\\[1em]
+\begin{frame}{Parameter scan}
+  Wrap everything into a function (\texttt{TB} = $\tan\beta$, \texttt{Xtt} = $X_t/\MS$):\\[1em]
   \usebox{\listbox}
 \end{frame}
 
@@ -625,12 +625,12 @@ data = ParallelMap[{ N[#], CalcMh[#, 5, 0] }&,
        ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Parameter scan}
   Scan over $\MS \in [0.3, 5]\eh{TeV}$ with $X_t = 0$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Parameter scan}
   \begin{center}
     \includegraphics[width=0.6\textwidth]{plots/HSSUSY/Mh_MS_TB-5_Xt-0}
   \end{center}
@@ -673,7 +673,7 @@ data = ParallelMap[{ N[#], CalcMh[MS, TB, #] }&,
        ];
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Let's make a plot!}
+\begin{frame}{Parameter scan}
   Scan over $X_t/\MS \in [-3.5, 3.5]$ with $\MS = 5\eh{TeV}$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
 \end{frame}
