@@ -46,7 +46,7 @@
   numbers=left,
   numberstyle=\tiny,
   stepnumber=1,
-  basicstyle=\ttfamily\footnotesize,
+  basicstyle=\ttfamily\scriptsize,
   commentstyle=\ttfamily\color{gray},
   postbreak={\mbox{{$\hookrightarrow$}}\space\space},
   breakindent=10pt,
@@ -425,7 +425,7 @@ HighScaleInput = {
 \begin{frame}{Step 6: Define high-scale boundary condition}
   Fix $\lambda$ by matching to the MSSM the scale $Q$ = \lstinline{MS}:
   \begin{align*}
-    \lambda(Q) = \frac{1}{4} \left[ \frac{3}{5} g_1^2(Q) + g_2^2(Q) \right] \cos_{2\beta}^2
+    \lambda(Q) = \frac{1}{4} \left[ \frac{3}{5} g_1^2(Q) + g_2^2(Q) \right] \cos^2 {2\beta}
     \qquad \text{\mycite{0705.1496}}
   \end{align*}
   \\[1em]
@@ -500,8 +500,7 @@ HighScaleInput = {
    {\[Lambda], lambdaTree + lambda1L}
 };
 
-lambdaTree = (3/5 g1^2 + g2^2)/4 \
-             Cos[2 ArcTan[TanBeta]]^2;
+lambdaTree = (3/5 g1^2 + g2^2)/4 Cos[2 ArcTan[TanBeta]]^2;
 
 lambda1L = With[{yt = Yu[3,3],
                  Xt = AtInput - MuInput/TanBeta},
@@ -513,7 +512,7 @@ lambda1L = With[{yt = Yu[3,3],
   Let's implement the leading 1-loop correction from
   \bigcite{0705.1496}:
   \begin{align*}
-    \lambda(Q) &= \frac{1}{4} \left[ \frac{3}{5} g_1^2 + g_2^2 \right] \cos_{2\beta}^2 
+    \lambda(Q) &= \frac{1}{4} \left[ \frac{3}{5} g_1^2 + g_2^2 \right] \cos^2 2\beta
     + \frac{3}{8} \frac{y_t^4}{\pi^2}\left[
        \frac{X_t^2}{\MS^2}
        - \frac{X_t^4}{12 \MS^4}
