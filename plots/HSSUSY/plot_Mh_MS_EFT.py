@@ -54,6 +54,7 @@ leg.get_frame().set_edgecolor('black')
 plt.ylim([60,130])
 plt.xlim([100,50000])
 plt.title(r'$X_t = 0, \tan\beta = 5$')
+plt.tight_layout()
 
 plt.savefig(outfile)
 print "saved plot in ", outfile

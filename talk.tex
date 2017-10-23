@@ -115,6 +115,7 @@
 \newcommand{\Mathematica}{\texttt{Mathematica}}
 \newcommand{\Himalaya}{\texttt{Himalaya}}
 \newcommand{\GMTCalc}{\texttt{GM2Calc}}
+\newcommand{\GAMBIT}{\texttt{GAMBIT}}
 
 % set look of slides
 \usetheme{Madrid}
@@ -330,6 +331,7 @@
 \end{frame}
 
 \newsavebox{\listbox}
+\newsavebox{\listboxt}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
 LagNoHC = mu2 conj[H].H -
@@ -347,6 +349,8 @@ LagHC   = -(Yd conj[H].d.q + Ye conj[H].e.l
   \end{center}
   and the non-interaction Lagrangian \\[2em]
   \usebox{\listbox}
+  \\[1em]
+  See Florian's talk from Monday, 23th October 2017 9am
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
@@ -355,21 +359,21 @@ $ mkdir model_files/HSSUSY/
 $ touch model_files/HSSUSY/FlexibleSUSY.m.in
 \end{lstlisting}\end{lrbox} % $
 
-\begin{frame}{Step 1: Create FlexibleSUSY model file}
-  \usebox{\listbox}
-\end{frame}
-
-\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+\begin{lrbox}{\listboxt}\begin{lstlisting}[language=Mathematica]
 FSModelName = "HSSUSY";
 FSEigenstates = SARAH`EWSB;
 FSDefaultSARAHModel = SM;
 \end{lstlisting}\end{lrbox}
 
+\begin{frame}{Step 1: Create FlexibleSUSY model file}
+  \usebox{\listbox}
+\end{frame}
+
 \begin{frame}{Step 2: Define model information}
   Put into the model file
   \lstinline{model_files/HSSUSY/FlexibleSUSY.m.in}:
   \\[2em]
-  \usebox{\listbox}
+  \usebox{\listboxt}
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
@@ -410,7 +414,7 @@ LowScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 4: Define low-scale boundary condition}
-  Fix $v^{\MSbar}$, $y_f^{\MSbar}$ and $g_i^{\MSbar}$ at the scale $Q = M_Z$:\\[2em]
+  Fix SM parameters $v^{\MSbar}$, $y_f^{\MSbar}$ and $g_i^{\MSbar}$ at the scale $Q = M_Z$:\\[2em]
   \usebox{\listbox}
   \\[1em]
   \lstinline{MZMSbar} = $m_Z^{\MSbar}(Q)$
@@ -442,7 +446,7 @@ HighScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 6: Define high-scale boundary condition}
-  Fix $\lambda$ by matching to the MSSM the scale $Q$ = \lstinline{MS}:
+  Fix $\lambda$ by tree-level matching to the MSSM the scale $Q$ = \lstinline{MS}:
   \begin{align*}
     \lambda(Q) = \frac{1}{4} \left[ \frac{3}{5} g_1^2(Q) + g_2^2(Q) \right] \cos^2 {2\beta}
     \qquad \text{\mycite{0705.1496}}
@@ -463,9 +467,9 @@ UseHiggs3LoopSM   = True; (* 3L contributions to Mh *)
   Higher-order corrections from the literature \mycite{hep-ph/9911434,
     hep-ph/9912391, hep-ph/0004189, 1407.4336}:
   \begin{align*}
-    m_t &= M_t + \Delta^{(1)} m_t + \Delta^{(2)} m_t + \Delta^{(3)} m_t \\
-    \alpha_s &= \frac{\alpha_s^{\SM(5)}}{1 + \Delta^{(1)} \as + \Delta^{(2)} \as + \Delta^{(3)} \as} \\
-    M_h^2 &= m_h^2 + \Delta^{(1)} m_h^2 + \Delta^{(2)} m_h^2 + \Delta^{(3)} m_h^2
+    m_t &= M_t + \Delta^{(1)} m_t + \Delta^{(2)} m_t + \textcolor{red}{\Delta^{(3)} m_t} \\
+    \alpha_s &= \frac{\alpha_s^{\SM(5)}}{1 + \Delta^{(1)} \as + \textcolor{red}{\Delta^{(2)} \as + \Delta^{(3)} \as}} \\
+    M_h^2 &= m_h^2 + \Delta^{(1)} m_h^2 + \textcolor{red}{\Delta^{(2)} m_h^2 + \Delta^{(3)} m_h^2}
   \end{align*}
   \\[1em]
   \usebox{\listbox}
@@ -503,7 +507,8 @@ Block MASS
 \end{lstlisting}\end{lrbox} % $
 
 \begin{frame}{Finally: Run HSSUSY}
-  Run HSSUSY using an SLHA input file:\\[2em]
+  Run HSSUSY using the provided SLHA input file
+  \lstinline{models/HSSUSY/LesHouches.in.HSSUSY}:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
@@ -519,7 +524,7 @@ Get["models/HSSUSY/HSSUSY_librarylink.m"];
 
 \begin{frame}{Parameter scan}
   We'll use the \Mathematica\ interface of FlexibleSUSY to perform a
-  scan over $\MS$.\\[1em]
+  scan over $\MS$.  (Scanning at the C++ level or via \GAMBIT\ is also possible.)\\[1em]
   Open \Mathematica\ and type:\\[2em]
   \usebox{\listbox}
   \\[1em]
@@ -633,6 +638,8 @@ data = ParallelMap[{ N[#], CalcMh[#, 5, 0] }&,
 \begin{frame}{Parameter scan}
   Scan over $\MS \in [0.3, 5]\eh{TeV}$ with $X_t = 0$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
+  \\[1em]
+  $X_t = A_t - \mu/\tan\beta$
 \end{frame}
 
 \begin{frame}{Parameter scan}
@@ -685,9 +692,11 @@ data = ParallelMap[{ N[#], CalcMh[MS, TB, #] }&,
 
 \begin{frame}{Parameter scan over $X_t/\MS$}
   \begin{center}
-    \includegraphics[width=0.6\textwidth]{plots/HSSUSY/Mh_Xt_TB-5_MS-5000}
+    \includegraphics[width=0.5\textwidth]{plots/HSSUSY/Mh_Xt_TB-5_MS-5000}
   \end{center}
-  1- and 2-loop contributions from \bigcite{1407.4081, 1703.08166}
+  FlexibleSUSY's HSSUSY model implements all known 1- and 2-loop
+  corrections from \bigcite{1407.4081, 1703.08166}.  This is the most
+  precise Higgs mass calculation in the MSSM for $\MS \gg M_t$!
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]

@@ -53,6 +53,7 @@ leg.get_frame().set_edgecolor('black')
 plt.ylim([110,128])
 plt.xlim([-4,4])
 plt.title(r'$M_S = 5\;\mathrm{TeV}, \tan\beta = 5$')
+plt.tight_layout()
 
 plt.savefig(outfile)
 print "saved plot in ", outfile
