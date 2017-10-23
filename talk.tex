@@ -560,20 +560,11 @@ handle = FSHSSUSYOpenHandle[
         calculateStandardModelMasses -> 1
     },
     fsModelParameters -> {
+        MS      -> 5000,
+        MEWSB   -> 173.34,
         TanBeta -> 5,
-        MEWSB -> 173.34,
-        MSUSY -> 5000,
-        M1Input -> 5000,
-        M2Input -> 5000,
-        M3Input -> 5000,
         MuInput -> 5000,
-        mAInput -> 5000,
-        AtInput -> 1000,
-        msq2 -> 5000^2 IdentityMatrix[3],
-        msu2 -> 5000^2 IdentityMatrix[3],
-        msd2 -> 5000^2 IdentityMatrix[3],
-        msl2 -> 5000^2 IdentityMatrix[3],
-        mse2 -> 5000^2 IdentityMatrix[3]
+        AtInput -> 1000
     }
 ];
 
@@ -611,21 +602,20 @@ Out[]=
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
-CalcMh[MS_, TB_, Xtt_] :=
+CalcMh[MSUSY_, TB_, Xtt_] :=
     Module[{handle, spec},
         handle = FSHSSUSYOpenHandle[
             fsSettings -> { ... },
             fsSMParameters -> { ... },
             fsModelParameters -> {
-                TanBeta -> TB, MEWSB -> 173.34, MSUSY -> MS,
-                M1Input -> MS, M2Input -> MS, M3Input -> MS,
-                MuInput -> MS, mAInput -> MS,
-                AtInput -> (Xtt + 1/TB) MS,
-                msq2 -> MS^2 IdentityMatrix[3],
-                msu2 -> MS^2 IdentityMatrix[3],
-                msd2 -> MS^2 IdentityMatrix[3],
-                msl2 -> MS^2 IdentityMatrix[3],
-                mse2 -> MS^2 IdentityMatrix[3]
+                MS -> MSUSY, MEWSB -> 173.34,
+                TanBeta -> TB, MuInput -> MSUSY,
+                AtInput -> (Xtt + 1/TB) MSUSY,
+                msq2 -> MSUSY^2 IdentityMatrix[3],
+                msu2 -> MSUSY^2 IdentityMatrix[3],
+                msd2 -> MSUSY^2 IdentityMatrix[3],
+                msl2 -> MSUSY^2 IdentityMatrix[3],
+                mse2 -> MSUSY^2 IdentityMatrix[3]
             }
         ];
         spec = FSHSSUSYCalculateSpectrum[handle];
@@ -689,7 +679,7 @@ lambda1LEFT = DeltaEFT Yu[3,3]^4/(4 Pi)^2 v^2/MS^2;
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
-CalcMh[MS_, TB_, Xtt_, deltaEFT_] :=
+CalcMh[MSUSY_, TB_, Xtt_, deltaEFT_] :=
     Module[{handle, spec},
         handle = FSHSSUSYOpenHandle[
             fsSettings -> { ... },

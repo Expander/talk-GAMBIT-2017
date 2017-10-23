@@ -90,23 +90,23 @@ CalcMh1L[MS_, TB_, Xtt_, loops_, deltaEFT_] :=
                    TanBeta -> TB,
                    MEWSB -> 173.34,
                    MSUSY -> MS,
-                   M1Input -> MS,
-                   M2Input -> MS,
-                   M3Input -> MS,
+                   (* M1Input -> MS, *)
+                   (* M2Input -> MS, *)
+                   (* M3Input -> MS, *)
                    MuInput -> MS,
-                   mAInput -> MS,
+                   (* mAInput -> MS, *)
                    AtInput -> (Xtt + 1/TB) MS,
-                   msq2 -> MS^2 IdentityMatrix[3],
-                   msu2 -> MS^2 IdentityMatrix[3],
-                   msd2 -> MS^2 IdentityMatrix[3],
-                   msl2 -> MS^2 IdentityMatrix[3],
-                   mse2 -> MS^2 IdentityMatrix[3],
+                   (* msq2 -> MS^2 IdentityMatrix[3], *)
+                   (* msu2 -> MS^2 IdentityMatrix[3], *)
+                   (* msd2 -> MS^2 IdentityMatrix[3], *)
+                   (* msl2 -> MS^2 IdentityMatrix[3], *)
+                   (* mse2 -> MS^2 IdentityMatrix[3], *)
                    LambdaLoopOrder -> loops,
-                   TwoLoopAtAs -> 1,
-                   TwoLoopAbAs -> 1,
-                   TwoLoopAtAb -> 1,
-                   TwoLoopAtauAtau -> 1,
-                   TwoLoopAtAt -> 1,
+                   (* TwoLoopAtAs -> 1, *)
+                   (* TwoLoopAbAs -> 1, *)
+                   (* TwoLoopAtAb -> 1, *)
+                   (* TwoLoopAtauAtau -> 1, *)
+                   (* TwoLoopAtAt -> 1, *)
                    DeltaEFT -> deltaEFT
                }
            ];
