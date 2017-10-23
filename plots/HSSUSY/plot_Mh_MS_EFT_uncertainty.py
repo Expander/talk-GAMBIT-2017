@@ -10,10 +10,10 @@ directory = r'plots/HSSUSY/'
 
 # plot Mh(MS)
 
-outfile = directory + r'Mh_MS_TB-5_Xt-0_EFT_uncertainty.pdf'
+outfile = directory + r'Mh_MS_TB-5_Xt-2_EFT_uncertainty.pdf'
 
 try:
-    data = np.genfromtxt(directory + r'Mh_MS_TB-5_Xt-0.dat')
+    data = np.genfromtxt(directory + r'Mh_MS_TB-5_Xt-2.dat')
 except:
     print "Error: could not load numerical data from file"
     exit
@@ -50,9 +50,9 @@ leg = plt.legend([r'$\lambda^{(1L)}$'],
            loc='lower right', fontsize=10, fancybox=None, framealpha=None)
 leg.get_frame().set_alpha(1.0)
 leg.get_frame().set_edgecolor('black')
-plt.ylim([60,130])
+plt.ylim([90,140])
 plt.xlim([100,50000])
-plt.title(r'$X_t = 0, \tan\beta = 5$')
+plt.title(r'$X_t/M_S = 2, \tan\beta = 5$')
 plt.tight_layout()
 
 plt.savefig(outfile)
