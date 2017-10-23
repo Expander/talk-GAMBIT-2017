@@ -39,11 +39,11 @@ plt.grid(color='0.5', linestyle=':', linewidth=0.2, dashes=(0.5,1.5))
 plt.xlabel(r'$X_t / M_S$')
 plt.ylabel(r'$M_h\,/\,\mathrm{GeV}$')
 
-plt.plot(MS, Mh0L, 'r-' , linewidth=1.2)
+# plt.plot(MS, Mh0L, 'r-' , linewidth=1.2)
 plt.plot(MS, Mh1L, 'b--', linewidth=1.2, dashes=(3,2,3,2))
-plt.plot(MS, Mh2L, 'g:' , linewidth=1.2)
+plt.plot(MS, Mh2L, 'r-' , linewidth=1.2)
 
-leg = plt.legend([r'$\lambda^{(0L)}$',
+leg = plt.legend([# r'$\lambda^{(0L)}$',
                   r'$\lambda^{(1L)}$',
                   r'$\lambda^{(2L)}$'
                  ],
