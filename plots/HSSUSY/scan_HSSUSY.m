@@ -119,7 +119,7 @@ CalcMh1L[MS_, TB_, Xtt_, loops_, deltaEFT_] :=
 LaunchKernels[];
 DistributeDefinitions[CalcMh];
 
-Xtt = 0;
+Xtt = 2;
 TB  = 5;
 
 data = ParallelMap[
@@ -132,7 +132,7 @@ data = ParallelMap[
     LogRange[100, 5 10^4, 100]
 ];
 
-Export["Mh_MS_TB-" <> ToString[TB] <> "_Xt-0.dat", data];
+Export["Mh_MS_TB-" <> ToString[TB] <> "_Xt-2.dat", data];
 
 MS = 5000;
 
