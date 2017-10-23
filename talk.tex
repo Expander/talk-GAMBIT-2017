@@ -701,15 +701,18 @@ CalcMh[MSUSY_, TB_, Xtt_, deltaEFT_] :=
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+Xtt = 2;
+TB  = 5;
+
 data = ParallelMap[{ N[#],
-                     CalcMh[#, 5, 0, 0],
-                     CalcMh[#, 5, 0, 1] }&,
+                     CalcMh[#, TB, Xtt, 0],
+                     CalcMh[#, TB, Xtt, 1] }&,
                    LogRange[100, 5 10^4, 100]
        ];
 \end{lstlisting}\end{lrbox} % $
 
 \begin{frame}{Estimate the EFT uncertainty}
-  Scan over $\MS \in [0.1, 5]\eh{TeV}$ with $X_t = 0$, $\tan\beta = 5$:\\[2em]
+  Scan over $\MS \in [0.1, 5]\eh{TeV}$ with $X_t/\MS = 2$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
