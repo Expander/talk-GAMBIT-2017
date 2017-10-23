@@ -4,8 +4,8 @@ OUTFILENAME := talk.pdf
 PLOTS       := \
 		plots/HSSUSY/Mh_Xt_TB-5_MS-5000.pdf \
 		plots/HSSUSY/Mh_MS_TB-5_Xt-0.pdf \
-		plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT.pdf \
-		plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty.pdf
+		plots/HSSUSY/Mh_MS_TB-5_Xt-0_EFT.pdf \
+		plots/HSSUSY/Mh_MS_TB-5_Xt-0_EFT_uncertainty.pdf
 
 TEXDIRS     := $(PLOTSDIR)
 BIBTEX      := bibtex
@@ -20,10 +20,10 @@ plots/HSSUSY/Mh_Xt_TB-5_MS-5000.pdf: plots/HSSUSY/plot_Mh_Xt.py plots/HSSUSY/*.d
 plots/HSSUSY/Mh_MS_TB-5_Xt-0.pdf: plots/HSSUSY/plot_Mh_MS.py plots/HSSUSY/*.dat
 	$<
 
-plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT.pdf: plots/HSSUSY/plot_Mh_MS_EFT.py plots/HSSUSY/*.dat
+plots/HSSUSY/Mh_MS_TB-5_Xt-0_EFT.pdf: plots/HSSUSY/plot_Mh_MS_EFT.py plots/HSSUSY/*.dat
 	$<
 
-plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty.pdf: plots/HSSUSY/plot_Mh_MS_EFT_uncertainty.py plots/HSSUSY/*.dat
+plots/HSSUSY/Mh_MS_TB-5_Xt-0_EFT_uncertainty.pdf: plots/HSSUSY/plot_Mh_MS_EFT_uncertainty.py plots/HSSUSY/*.dat
 	$<
 
 %.pdf: %.tex $(PLOTS)
