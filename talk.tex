@@ -721,6 +721,45 @@ data = ParallelMap[{ N[#],
   \includegraphics[width=0.49\textwidth]{plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty}
 \end{frame}
 
+\section{Hands-on example: $(g-2)_\mu$ in the MRSSM}
+
+\begin{frame}{Contents}
+  \tableofcontents[currentsection]  
+\end{frame}
+
+\begin{frame}{MRSSM}
+  MRSSM = a minimal supersymmetric model with unbroken continuous
+  $R$-symmetry.
+  \\[1em]
+  Fields in the MRSSM on top of the MSSM:
+\begin{equation*}
+ \hat{R}_d:\textstyle (\mathbf{1} ,\mathbf{2},-\frac{1}{2}) ,
+ \hat{R}_u:\textstyle (\mathbf{1} ,\mathbf{2}, \frac{1}{2}) ,
+ \hat{S}:\textstyle (\mathbf{1} ,\mathbf{1}, 0) ,
+ \hat{T}:\textstyle (\mathbf{1} ,\mathbf{3}, 0) ,
+ \hat{O}:\textstyle (\mathbf{8} ,\mathbf{1}, 0)
+\end{equation*}
+%
+Superpotential:
+%
+\begin{align*}
+  \begin{split}
+    \mathcal{W}_{\text{MRSSM}} &= \mathcal{W}_{\text{MSSM}}(\mu = 0)
+    + \mu_d \hat{R}_d \cdot \hat{H}_d + \mu_u \hat{R}_u\cdot\hat{H}_u \\
+    &\phantom{={}}+ \lambda_d \hat{S} \hat{R}_d \cdot \hat{H}_d +
+    \lambda_u \hat{S} \hat{R}_u\cdot\hat{H}_u +\Lambda_d
+    \hat{R}_d\cdot \hat{T} \hat{H}_d +\Lambda_u \hat{R}_u\cdot\hat{T}
+    \hat{H}_u .
+  \end{split}
+\end{align*}
+\end{frame}
+
+\begin{frame}{MRSSM}
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{plots/MRSSM/MRSSM2_MS_amu_Mh_MW_MG}
+  \end{center}
+\end{frame}
+
 \begin{frame}{Summary}
   \tikz[overlay,remember picture] 
   \node[opacity=0.3, at=(current page.south east),anchor=south east,inner sep=0pt, xshift=-0.2cm, yshift=0.2cm] {
