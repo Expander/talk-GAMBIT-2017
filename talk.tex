@@ -912,4 +912,22 @@ Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
   \emph{Planned extensions:} decays, EWPOs, EFT towers
 \end{frame}
 
+\begin{frame}[noframenumbering]
+  \begin{center}
+    \Huge Backup
+  \end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]{Example: CNMSSM}
+  \begin{center}
+  \begin{tikzpicture}
+    \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
+    \draw[thick,darkgreen] (0,4) node[left]{$M_X$} -- node[above = 0.5cm,black]{GUT} (3,4) node[right,black]{fix $m_{\tilde{f}}^2, A_f, M_i, \sign v_S, \lambda, \textcolor{red}{m_S^2}$};
+    \draw[thick,darkgreen,dashed] (0,2) node[left]{$M_S$} -- (3,2) node[right,black]{fix $|v_S|, \kappa, \textcolor{red}{m_0^2}$};
+    \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{NMSSM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v_i$};
+  \end{tikzpicture}
+  \end{center}
+  \texttt{FSBVPSolvers = \{ SemiAnalyticSolver \};}
+\end{frame}
+
 \end{document}
