@@ -11,10 +11,10 @@ directory = r'plots/MRSSM/'
 
 # plot Mh(MS)
 
-outfile = directory + r'MRSSMEFTHiggs_MS_amu_Mh_MW_MG.pdf'
+outfile = directory + r'MRSSMEFTHiggs_MS_amu_Mh.pdf'
 
 try:
-    data = np.genfromtxt(directory + r'scan_MRSSMEFTHiggs_MS_amu_Mh_MW_MG.dat')
+    data = np.genfromtxt(directory + r'scan_MRSSMEFTHiggs_MS_amu_Mh_DMh.dat')
 except:
     print "Error: could not load numerical data from file"
     exit
@@ -22,8 +22,7 @@ except:
 MS          = data[:,0]
 amu         = data[:,1] * 10**10
 Mh          = data[:,2]
-MW          = data[:,3]
-MG          = data[:,4]
+DMh         = data[:,3]
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif', weight='normal')
@@ -43,17 +42,11 @@ plt.xlabel(r'$M_S\,/\,\mathrm{GeV}$')
 plt.ylabel(r'$M_h\,/\,\mathrm{GeV}$',color='r')
 
 plt.plot(MS, Mh, 'r-' , linewidth=1.2)
-# plt.plot(MS, MW, 'b--', linewidth=1.2)
-# plt.plot(MS, MG, 'b:' , linewidth=1.2)
 
-# leg = plt.legend([r'$M_h$'
-#                   # r'$M_W$'
-#                   # r'$M_{\tilde{g}}$'
-#                  ],
-#            loc='center right', fontsize=10, fancybox=None, framealpha=None)
-# leg.get_frame().set_alpha(1.0)
-# leg.get_frame().set_edgecolor('black')
-plt.ylim([80,130])
+plt.fill_between(MS, Mh - DMh, Mh + DMh,
+                 facecolor='red', alpha=0.3, interpolate=True, linewidth=0.0)
+
+plt.ylim([90,130])
 plt.title(r'$\lambda_u = \lambda_t = \Lambda_u = \Lambda_d = -0.5, \tan\beta = 10$')
 
 Mhexp = 125.09
@@ -68,7 +61,7 @@ ax.add_patch(
     )
 )
 
-plt.text(ax.get_xlim()[0] + 1500, Mhexp + sigma + 0.4, r"ATLAS/CMS $\pm1\sigma$", fontsize=8)
+plt.text(ax.get_xlim()[0] + 500, Mhexp + sigma + 0.4, r"ATLAS/CMS $\pm1\sigma$", fontsize=8)
 
 ### g-2 ###
 

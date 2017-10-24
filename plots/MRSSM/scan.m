@@ -1,7 +1,8 @@
 Get["models/MRSSMEFTHiggs/MRSSMEFTHiggs_librarylink.m"];
+Get["model_files/MRSSMEFTHiggs/MRSSMEFTHiggs_uncertainty_estimate.m"];
 
 invalid;
-scaleFactor = 10;
+scaleFactor = 9;
 
 LinearRange[start_, stop_, steps_] :=
     Table[start + i/steps (stop - start), {i, 0, steps}];
@@ -10,16 +11,14 @@ LinearRange[start_, stop_, steps_] :=
 LogRange[start_, stop_, steps_] :=
     Exp /@ Range[Log[start], Log[stop], (Log[stop] - Log[start])/steps];
 
-RunMRSSMBMP1[MSUSY_?NumericQ] :=
-    Module[{handle, spec, obs},
-           handle = FSMRSSMEFTHiggsOpenHandle[
+MakeInput[MSUSY_?NumericQ] := {
                fsSettings -> {
-                   precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
+                   precisionGoal -> 1.*^-5,           (* FlexibleSUSY[0] *)
                    maxIterations -> 10000,            (* FlexibleSUSY[1] *)
                    solver -> 1,                       (* FlexibleSUSY[2] *)
                    calculateStandardModelMasses -> 1, (* FlexibleSUSY[3] *)
-                   poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
-                   ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
+                   poleMassLoopOrder -> 3,            (* FlexibleSUSY[4] *)
+                   ewsbLoopOrder -> 3,                (* FlexibleSUSY[5] *)
                    betaFunctionLoopOrder -> 3,        (* FlexibleSUSY[6] *)
                    thresholdCorrectionsLoopOrder -> 2,(* FlexibleSUSY[7] *)
                    higgs2loopCorrectionAtAs -> 1,     (* FlexibleSUSY[8] *)
@@ -37,7 +36,7 @@ RunMRSSMBMP1[MSUSY_?NumericQ] :=
                    eftMatchingLoopOrderDown -> 1,     (* FlexibleSUSY[21] *)
                    eftHiggsIndex -> 0,                (* FlexibleSUSY[22] *)
                    calculateBSMMasses -> 1,           (* FlexibleSUSY[23] *)
-                   thresholdCorrections -> 123111321, (* FlexibleSUSY[24] *)
+                   thresholdCorrections -> 122111221, (* FlexibleSUSY[24] *)
                    higgs3loopCorrectionRenScheme -> 0,(* FlexibleSUSY[25] *)
                    higgs3loopCorrectionAtAsAs -> 1,   (* FlexibleSUSY[26] *)
                    higgs3loopCorrectionAbAsAs -> 1,   (* FlexibleSUSY[27] *)
@@ -100,34 +99,38 @@ RunMRSSMBMP1[MSUSY_?NumericQ] :=
                    MDWBTInput -> MSUSY,
                    MDGocInput -> MSUSY
                }
-           ];
+};
+
+RunMRSSMBMP1[MSUSY_?NumericQ] :=
+    Module[{handle, spec, obs, Mhh, DMhh},
+           handle = FSMRSSMEFTHiggsOpenHandle[Sequence @@ MakeInput[MSUSY]];
            spec = FSMRSSMEFTHiggsCalculateSpectrum[handle];
            obs  = FSMRSSMEFTHiggsCalculateObservables[handle];
            FSMRSSMEFTHiggsCloseHandle[handle];
            If[spec === $Failed, Return[invalid]];
-           Join[MRSSMEFTHiggs /. spec, MRSSMEFTHiggs /. obs]
+           { Mhh, DMhh } = CalcMRSSMEFTHiggsDMh[Sequence @@ MakeInput[MSUSY]];
+           Join[MRSSMEFTHiggs /. spec, MRSSMEFTHiggs /. obs, { MHiggs -> Mhh , DMHiggs -> DMhh }]
           ];
 
 RunMRSSM[MS_] :=
     Module[{spec = RunMRSSMBMP1[MS]},
            If[spec === invalid,
-              Array[invalid&, {4}],
+              Array[invalid&, {3}],
               {
                   FlexibleSUSYObservable`aMuon /. spec,
                   (Pole[M[hh]] /. spec)[[1]],
-                  Pole[M[VWm]] /. spec,
-                  Pole[M[Glu]] /. spec
+                  (DMHiggs /. spec)
               }
              ]
           ];
 
 (* Print[{ *)
 (*     N[#], Sequence @@ RunMRSSM[#] *)
-(* }]& /@ LogRange[200, 10000, 10]; *)
+(* }]& /@ LogRange[100, 10000, 5]; *)
 
 data = ParallelMap[
     { N[#], Sequence @@ RunMRSSM[#] }&,
     LogRange[100, 10^4, 60]
 ];
 
-Export["scan_MRSSMEFTHiggs_MS_amu_Mh_MW_MG.dat", data];
+Export["scan_MRSSMEFTHiggs_MS_amu_Mh_DMh.dat", data];
