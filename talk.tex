@@ -721,7 +721,7 @@ data = ParallelMap[{ N[#],
   \includegraphics[width=0.49\textwidth]{plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty}
 \end{frame}
 
-\section{Hands-on example: $(g-2)_\mu$ in the MRSSM}
+\section{Hands-on example: $(g-2)_\mu$ and $M_h$ in the MRSSM}
 
 \begin{frame}{Contents}
   \tableofcontents[currentsection]  
@@ -754,10 +754,96 @@ Superpotential:
 \end{align*}
 \end{frame}
 
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+ExtraSLHAOutputBlocks = {
+  {
+     (* block name *)
+     FlexibleSUSYLowEnergy, NoScale,
+     {
+        (* entry, FlexibleSUSY's symbol for (g-2) *)
+        {21, FlexibleSUSYObservable`aMuon}
+     }
+  }
+};
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Enable $(g-2)_\mu$ in the MRSSM model file}
+  Add a new output block \texttt{"FlexibleSUSYLowEnergy"} and write
+  $(g-2)_\mu$ to entry 21:
+  \\[2em]
+  \usebox{\listbox}
+  \\[1em]
+  Available observables in FlexibleSUSY 2.0:
+  \begin{align*}
+    &\texttt{aMuonGM2Calc},\ \ \texttt{aMuonGM2CalcUncertainty},\ \ \texttt{EDM[<particle>]},\\
+    &\texttt{CpHiggsPhotonPhoton},\ \ \texttt{CpHiggsGluonGluon},\\
+    &\texttt{CpPseudoScalarPhotonPhoton},\ \ \texttt{CpPseudoScalarGluonGluon}
+  \end{align*}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+$ ./createmodel --name=MRSSM
+$ ./configure --with-models=MRSSM
+$ make -j4
+\end{lstlisting}\end{lrbox} % $
+
+\begin{lrbox}{\listboxt}\begin{lstlisting}[language=bash]
+$ cd models/MRSSM/
+$ ./run_MRSSM.x \
+    --slha-input-file=LesHouches.in.MRSSM
+...
+Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
+    21    -3.86010766E-12   # Delta(g-2)_muon/2 FlexibleSUSY
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Enable $(g-2)_\mu$ in the MRSSM model file}
+  Build the MRSSM:\\[1.5em]
+  \usebox{\listbox}
+  \\[1em]
+  Set \texttt{FlexibleSUSY[15] = 1} in the SLHA input file and run on
+  the command line:
+  \\[1.5em]
+  \usebox{\listboxt}
+\end{frame}
+
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
+FlexibleEFTHiggs = True;
+\end{lstlisting}\end{lrbox} % $
+
+\begin{lrbox}{\listboxt}\begin{lstlisting}[language=Mathematica]
+SUSYScaleInput = {
+    {mq2, LHInput[mq2]},
+    {mu2, LHInput[mu2]},
+    ...
+    (* fix ratio of vu/vd = TanBeta *)
+    {vu, Sqrt[vu^2 + vd^2] Sin[ArcTan[TanBeta]]},
+    {vd, Sqrt[vu^2 + vd^2] Cos[ArcTan[TanBeta]]}
+};
+
+(* fix Sqrt[vu^2 + vd^2] in the MRSSM *)
+(* VEV is the SM-like VEV in the MRSSM *)
+MatchingScaleInput = {
+    {vu, VEV Sin[ArcTan[vu/vd]]},
+    {vd, VEV Cos[ArcTan[vu/vd]]}
+};
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Enable NLL resummation of $M_h$ (FlexibleEFTHiggs)}
+  Set in the model file:\\[1em]
+  \usebox{\listbox}
+  \\[1em]
+  Input model parameters at the SUSY scale:
+  \\[1.5em]
+  \usebox{\listboxt}
+\end{frame}
+
 \begin{frame}{MRSSM}
   \begin{center}
-    \includegraphics[width=0.7\textwidth]{plots/MRSSM/MRSSMEFTHiggs_MS_amu_Mh}
+    \includegraphics[width=0.6\textwidth]{plots/MRSSM/MRSSMEFTHiggs_MS_amu_Mh}
   \end{center}
+  $9 m_{\tilde{q}}^2 = 9 m_{\tilde{u}}^2 = m_{\tilde{d}}^2 =
+  m_{\tilde{l}}^2 = m_{\tilde{e}}^2 = \MS^2$, $\mu_u = \mu_d = \MS$\\
+  $\Delta M_h$ via variation of $Q_\pole$, $Q_\text{match}$ and $y_t^{(2L)}(M_Z)$ vs.\ $y_t^{(3L)}(M_Z)$
 \end{frame}
 
 \begin{frame}{Summary}
