@@ -67,7 +67,7 @@ plt.text(ax.get_xlim()[0] + 500, Mhexp + sigma + 0.4, r"ATLAS/CMS $\pm1\sigma$",
 
 ax2 = ax.twinx()
 ax2.plot(MS, amu, 'b--', linewidth=1.2)
-ax2.set_ylabel(r'$(g-2)_\mu \times 10^{10}$', color='b')
+ax2.set_ylabel(r'$\Delta(g-2)_\mu/2 \times 10^{10}$', color='b')
 ax2.tick_params('y', colors='b',direction='in')
 
 plt.xlim([100,10000])
