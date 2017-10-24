@@ -27,7 +27,7 @@ MG          = data[:,4]
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif', weight='normal')
-fig = plt.figure(figsize=(4,4))
+fig = plt.figure(figsize=(4.5,4))
 plt.gcf().subplots_adjust(bottom=0.15, left=0.15) # room for xlabel
 ax = plt.gca()
 ax.set_axisbelow(True)

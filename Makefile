@@ -5,7 +5,8 @@ PLOTS       := \
 		plots/HSSUSY/Mh_Xt_TB-5_MS-5000.pdf \
 		plots/HSSUSY/Mh_MS_TB-5_Xt-0.pdf \
 		plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT.pdf \
-		plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty.pdf
+		plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty.pdf \
+		plots/MRSSM/MRSSM2_MS_amu_Mh_MW_MG.pdf
 
 TEXDIRS     := $(PLOTSDIR)
 BIBTEX      := bibtex
@@ -24,6 +25,9 @@ plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT.pdf: plots/HSSUSY/plot_Mh_MS_EFT.py plots/HSSUS
 	$<
 
 plots/HSSUSY/Mh_MS_TB-5_Xt-2_EFT_uncertainty.pdf: plots/HSSUSY/plot_Mh_MS_EFT_uncertainty.py plots/HSSUSY/*.dat
+	$<
+
+plots/MRSSM/MRSSM2_MS_amu_Mh_MW_MG.pdf: plots/MRSSM/plot_MS.py plots/MRSSM/*.dat
 	$<
 
 %.pdf: %.tex $(PLOTS)
