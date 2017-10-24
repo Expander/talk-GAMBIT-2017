@@ -1,4 +1,4 @@
-Get["models/MRSSM2/MRSSM2_librarylink.m"];
+Get["models/MRSSMEFTHiggs/MRSSMEFTHiggs_librarylink.m"];
 
 invalid;
 scaleFactor = 10;
@@ -10,14 +10,14 @@ LinearRange[start_, stop_, steps_] :=
 LogRange[start_, stop_, steps_] :=
     Exp /@ Range[Log[start], Log[stop], (Log[stop] - Log[start])/steps];
 
-RunMRSSMBMP1[MS_?NumericQ] :=
+RunMRSSMBMP1[MSUSY_?NumericQ] :=
     Module[{handle, spec, obs},
-           handle = FSMRSSM2OpenHandle[
+           handle = FSMRSSMEFTHiggsOpenHandle[
                fsSettings -> {
                    precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
                    maxIterations -> 10000,            (* FlexibleSUSY[1] *)
                    solver -> 1,                       (* FlexibleSUSY[2] *)
-                   calculateStandardModelMasses -> 0, (* FlexibleSUSY[3] *)
+                   calculateStandardModelMasses -> 1, (* FlexibleSUSY[3] *)
                    poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
                    ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
                    betaFunctionLoopOrder -> 3,        (* FlexibleSUSY[6] *)
@@ -77,35 +77,35 @@ RunMRSSMBMP1[MS_?NumericQ] :=
                    Mh -> 125.09
                },
                fsModelParameters -> {
-                   Ms -> MS,
                    TanBeta -> 10,
-                   BMuInput -> MS^2,
+                   MS -> MSUSY,
+                   LamTDInput -> -0.5,
+                   LamTUInput -> -0.5,
                    LamSDInput -> -0.5,
                    LamSUInput -> -0.5,
-                   LamTDInput -> -0.5, 
-                   LamTUInput -> -0.5,
-                   MDBSInput -> MS,
-                   mRu2Input -> MS^2, 
-                   MuDInput -> -MS,
-                   MuUInput -> MS,
-                   MDWBTInput -> MS, 
-                   MDGocInput -> MS,
-                   mT2Input -> MS^2,
-                   mS2Input -> scaleFactor MS^2, 
-                   moc2Input -> scaleFactor MS^2,
-                   mq2Input -> scaleFactor MS^2 IdentityMatrix[3], 
-                   md2Input -> scaleFactor MS^2 IdentityMatrix[3], 
-                   mu2Input -> MS^2 IdentityMatrix[3],
-                   ml2Input -> MS^2 IdentityMatrix[3], 
-                   me2Input -> MS^2 IdentityMatrix[3], 
-                   mRd2Input -> MS^2
+                   MuDInput -> -MSUSY,
+                   MuUInput -> MSUSY,
+                   BMuInput -> MSUSY^2,
+                   mq2Input -> scaleFactor MSUSY^2 IdentityMatrix[3],
+                   mu2Input -> scaleFactor MSUSY^2 IdentityMatrix[3],
+                   ml2Input -> MSUSY^2 IdentityMatrix[3],
+                   md2Input -> MSUSY^2 IdentityMatrix[3],
+                   me2Input -> MSUSY^2 IdentityMatrix[3],
+                   mS2Input -> scaleFactor MSUSY^2,
+                   moc2Input -> scaleFactor MSUSY^2,
+                   mT2Input -> MSUSY^2,
+                   mRd2Input -> MSUSY^2,
+                   mRu2Input -> MSUSY^2,
+                   MDBSInput -> MSUSY,
+                   MDWBTInput -> MSUSY,
+                   MDGocInput -> MSUSY
                }
            ];
-           spec = FSMRSSM2CalculateSpectrum[handle];
-           obs  = FSMRSSM2CalculateObservables[handle];
-           FSMRSSM2CloseHandle[handle];
+           spec = FSMRSSMEFTHiggsCalculateSpectrum[handle];
+           obs  = FSMRSSMEFTHiggsCalculateObservables[handle];
+           FSMRSSMEFTHiggsCloseHandle[handle];
            If[spec === $Failed, Return[invalid]];
-           Join[MRSSM2 /. spec, MRSSM2 /. obs]
+           Join[MRSSMEFTHiggs /. spec, MRSSMEFTHiggs /. obs]
           ];
 
 RunMRSSM[MS_] :=
@@ -130,4 +130,4 @@ data = ParallelMap[
     LogRange[100, 10^4, 60]
 ];
 
-Export["scan_MRSSM2_MS_amu_Mh_MW_MG.dat", data];
+Export["scan_MRSSMEFTHiggs_MS_amu_Mh_MW_MG.dat", data];

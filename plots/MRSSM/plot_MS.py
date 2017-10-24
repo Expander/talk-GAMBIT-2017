@@ -11,10 +11,10 @@ directory = r'plots/MRSSM/'
 
 # plot Mh(MS)
 
-outfile = directory + r'MRSSM2_MS_amu_Mh_MW_MG.pdf'
+outfile = directory + r'MRSSMEFTHiggs_MS_amu_Mh_MW_MG.pdf'
 
 try:
-    data = np.genfromtxt(directory + r'scan_MRSSM2_MS_amu_Mh_MW_MG.dat')
+    data = np.genfromtxt(directory + r'scan_MRSSMEFTHiggs_MS_amu_Mh_MW_MG.dat')
 except:
     print "Error: could not load numerical data from file"
     exit
