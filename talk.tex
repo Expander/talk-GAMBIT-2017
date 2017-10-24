@@ -98,6 +98,7 @@
 \newcommand{\MSbar}{\ensuremath{\overline{\text{MS}}}}
 \newcommand{\SM}{\ensuremath{\text{SM}}}
 \newcommand{\MSSM}{\ensuremath{\text{MSSM}}}
+\newcommand{\MRSSM}{\ensuremath{\text{MRSSM}}}
 \newcommand{\pole}{\ensuremath{\text{pole}}}
 \newcommand{\tree}{\ensuremath{\text{tree}}}
 \newcommand{\fsstar}{\textbf{*}}
@@ -804,6 +805,17 @@ Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
   the command line:
   \\[1.5em]
   \usebox{\listboxt}
+\end{frame}
+
+\begin{frame}{NLL resummation of $M_h$ (FlexibleEFTHiggs)}
+  \begin{center}
+  \begin{tikzpicture}
+    \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
+    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MRSSM} (3,4) node[right,black]{fix $\lambda$ from $M_h^\SM = M_h^\MRSSM$};
+    \draw[thick,dashed,darkgreen] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right,black]{fix $\mu^2$ by EWSB};
+    \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$ from obs.};
+  \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
