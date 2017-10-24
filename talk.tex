@@ -849,6 +849,36 @@ MatchingScaleInput = {
   \usebox{\listboxt}
 \end{frame}
 
+\begin{lrbox}{\listbox}\begin{lstlisting}[language=bash]
+$ ./createmodel --name=MRSSMEFTHiggs
+$ ./configure --with-models=MRSSMEFTHiggs
+$ make -j4
+\end{lstlisting}\end{lrbox} % $
+
+\begin{lrbox}{\listboxt}\begin{lstlisting}[language=bash]
+$ cd models/MRSSMEFTHiggs/
+$ ./run_MRSSMEFTHiggs.x \
+    --slha-input-file=LesHouches.in.MRSSMEFTHiggs
+...
+Block MASS
+        25     1.25072439E+02   # hh
+   1000021     5.13209677E+03   # Glu
+   3000022     5.15724370E+03   # sigmaO
+   3000021     1.22138476E+04   # phiO
+       ...
+Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
+    21     2.61171353E-13   # Delta(g-2)_muon/2 FlexibleSUSY
+\end{lstlisting}\end{lrbox} % $
+
+\begin{frame}{Enable NLL resummation of $M_h$ (FlexibleEFTHiggs)}
+  Build the \texttt{MRSSMEFTHiggs}:\\[1.5em]
+  \usebox{\listbox}
+  \\[1em]
+  Run on the command line:
+  \\[1.5em]
+  \usebox{\listboxt}
+\end{frame}
+
 \begin{frame}{MRSSM}
   \begin{center}
     \includegraphics[width=0.6\textwidth]{plots/MRSSM/MRSSMEFTHiggs_MS_amu_Mh}
