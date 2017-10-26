@@ -417,10 +417,32 @@ LowScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 4: Define low-scale boundary condition}
+  \begin{center}
+  \begin{tikzpicture}
+    \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
+    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MSSM} (3,4) node[right,black]{fix $\lambda$ from MSSM};
+    \draw[thick,dashed,darkgreen] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right,black]{fix $\mu^2$ by EWSB};
+    \draw[thick,red] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right]{fix $g_i, y_f, v$ from obs.};
+  \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Step 4: Define low-scale boundary condition}
   Fix SM parameters $v^{\MSbar}$, $y_f^{\MSbar}$ and $g_i^{\MSbar}$ at the scale $Q = M_Z$:\\[2em]
   \usebox{\listbox}
   \\[1em]
   \lstinline{MZMSbar} = $m_Z^{\MSbar}(Q)$
+\end{frame}
+
+\begin{frame}{Step 5: Define EWSB-scale boundary condition}
+  \begin{center}
+  \begin{tikzpicture}
+    \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
+    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MSSM} (3,4) node[right,black]{fix $\lambda$ from MSSM};
+    \draw[thick,dashed,red] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right]{fix $\mu^2$ by EWSB};
+    \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$ from obs.};
+  \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
@@ -434,8 +456,19 @@ SUSYScaleInput = {
 \end{lstlisting}\end{lrbox}
 
 \begin{frame}{Step 5: Define EWSB-scale boundary condition}
-  Fix $\mu^2$ by EWSB condition at the scale $Q$ = \lstinline{MEWSB}:\\[2em]
+  Fix $\mu^2$ by EWSB condition at the scale $Q$ = \texttt{MEWSB}:\\[2em]
   \usebox{\listbox}
+\end{frame}
+
+\begin{frame}{Step 6: Define high-scale boundary condition}
+  \begin{center}
+  \begin{tikzpicture}
+    \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
+    \draw[thick,red] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MSSM} (3,4) node[right]{fix $\lambda$ from MSSM};
+    \draw[thick,dashed,darkgreen] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right,black]{fix $\mu^2$ by EWSB};
+    \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$ from obs.};
+  \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
