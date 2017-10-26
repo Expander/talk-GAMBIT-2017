@@ -800,6 +800,7 @@ Superpotential:
     \hat{H}_u .
   \end{split}
 \end{align*}
+Use \SARAH's \texttt{MRSSM} model.
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
@@ -837,10 +838,9 @@ $ make -j4
 
 \begin{lrbox}{\listboxt}\begin{lstlisting}[language=bash]
 $ cd models/MRSSM/
-$ ./run_MRSSM.x \
-    --slha-input-file=LesHouches.in.MRSSM
+$ ./run_MRSSM.x --slha-input-file=LesHouches.in.MRSSM
 ...
-Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
+Block FlexibleSUSYLowEnergy
     21    -3.86010766E-12   # Delta(g-2)_muon/2 FlexibleSUSY
 \end{lstlisting}\end{lrbox} % $
 
@@ -864,11 +864,12 @@ Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
   \begin{center}
   \begin{tikzpicture}
     \path[arrow] (0,0) -- (0,5) node[left]{$Q$};
-    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MRSSM} (3,4) node[right,black]{fix $\lambda$ from $M_h^\SM = M_h^\MRSSM$ at 1L};
+    \draw[thick,darkgreen] (0,4) node[left]{$M_S$} -- node[above = 0.5cm,black]{MRSSM} (3,4) node[right,black]{fix $\lambda$ from \textcolor{red}{$M_h^\SM = M_h^\MRSSM$} at 1L};
     \draw[thick,dashed,darkgreen] (0,1.5) node[left]{$M_t$} -- (3,1.5) node[right,black]{calculate $M_h$ at 2L};
     \draw[thick,darkgreen] (0,1) node[left]{$M_Z$} -- node[above = 1.2cm,black]{SM} node[below = 0.5cm,black]{SM(5)} (3,1) node[right,black]{fix $g_i, y_f, v$ from obs.};
   \end{tikzpicture}
   \end{center}
+  See \bigcite{1609.00371} for more details.
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
@@ -956,7 +957,7 @@ Block FlexibleSUSYLowEnergy Q= 1.00000000E+03
   model-specific 2-loop and 3-loop corrections from the literature
   \\[0.5em]
   \emph{Flexibility:} multiple BVP solvers, user-defined BCs, modular
-  C++ code, SLHA input/output, Mathematica input/output, SQLite output
+  C++ code, SLHA input/output, \Mathematica\ input/output, SQLite output
   \\[0.5em]
   \emph{High speed:} multi-threading, smart linear algebra, lazy evaluation
   \\[1em]
