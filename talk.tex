@@ -578,14 +578,15 @@ Get["models/HSSUSY/HSSUSY_librarylink.m"];
 \begin{frame}{Parameter scan}
   We'll use the \Mathematica\ interface of FlexibleSUSY to perform a
   scan over $\MS$.  (Scanning at the C++ level or via \GAMBIT\ is also possible.)\\[1em]
-  Open \Mathematica\ and type:\\[2em]
+  Open \Mathematica\ and type:\\[1.5em]
   \usebox{\listbox}
   \\[1em]
   Now we can use these functions (and more):\\
   \begin{itemize}
   \item[] \texttt{FSHSSUSYOpenHandle[<parameters>]}
-  \item[] \texttt{FSHSSUSYCloseHandle[<handle>]}
   \item[] \texttt{FSHSSUSYCalculateSpectrum[<handle>]}
+  \item[] \texttt{FSHSSUSYCalculateObservables[<handle>]}
+  \item[] \texttt{FSHSSUSYCloseHandle[<handle>]}
   \item[] \ldots
   \end{itemize}
 \end{frame}
@@ -611,6 +612,8 @@ FSHSSUSYCloseHandle[handle];
 
 \begin{frame}{Parameter scan}
   \usebox{\listbox}
+  \\[1em]
+  See \bigcite{1710.03760} for detailed documentation.
 \end{frame}
 
 \begin{lrbox}{\listbox}\begin{lstlisting}[language=Mathematica]
@@ -669,8 +672,11 @@ CalcMh[MSUSY_, TB_, Xtt_] :=
 MS = 5000;
 TB = 5;
 
-data = ParallelMap[{ N[#], CalcMh[MS, TB, #] }&,
-                   Range[-3.5, 3.5, 0.1]
+LaunchKernels[];
+
+data = ParallelMap[
+          { N[#], CalcMh[MS, TB, #] }&,
+          Range[-3.5, 3.5, 0.1]
        ];
 \end{lstlisting}\end{lrbox} % $
 
@@ -740,15 +746,20 @@ CalcMh[MSUSY_, TB_, Xtt_, deltaEFT_] :=
 Xtt = 2;
 TB  = 5;
 
-data = ParallelMap[{ N[#],
-                     CalcMh[#, TB, Xtt, 0],
-                     CalcMh[#, TB, Xtt, 1] }&,
-                   LogRange[100, 5 10^4, 100]
+LaunchKernels[];
+
+data = ParallelMap[
+          {
+            N[#],
+            CalcMh[#, TB, Xtt, 0],
+            CalcMh[#, TB, Xtt, 1]
+          }&,
+          LogRange[100, 5 10^4, 100]
        ];
 \end{lstlisting}\end{lrbox} % $
 
 \begin{frame}{Estimate the EFT uncertainty}
-  Scan over $\MS \in [0.1, 5]\eh{TeV}$ with $X_t/\MS = 2$, $\tan\beta = 5$:\\[2em]
+  Scan over $\MS \in [100, 5000]\eh{GeV}$ with $X_t/\MS = 2$, $\tan\beta = 5$:\\[2em]
   \usebox{\listbox}
 \end{frame}
 
